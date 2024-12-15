@@ -1,0 +1,33 @@
+#include <iostream> // Librería estándar para entrada y salida del programa
+#include <vector>   // Librería para manejar arreglos dinámicos (vectores)
+using namespace std;
+
+int main() {
+    vector<int> numeros(10); //Vector para almacenar los 10 números ingresados
+    vector<int> frecuencia(5, 0); //Vector para contar las frecuencias de los números del 1 al 5
+    
+    cout << "Bienvenidos estimados usuarios(as) es un placer enorme tenerlos aqui :)" << endl;
+    //Solicitar al usuario ingresar los 10 números
+    cout << "Por favor, ingresa 10 numeros enteros entre el valor de 1 y 5:" << endl;
+    for (int i = 0; i < 10; i++) {
+        cout << "Numero " << i + 1 << ": ";
+        cin >> numeros[i];
+    //Validar que el número esté en el rango [1, 5]
+        while (numeros[i] < 1 || numeros[i] > 5) {
+            cout << "Numero invalido. Por favor, ingresa un numero entre el valor de 1 y 5: ";
+            cin >> numeros[i];
+        }
+    }
+    // Contar las frecuencias
+    for (int numero : numeros) {
+        frecuencia[numero - 1]++; // Incrementar la posición correspondiente
+    }
+    // Mostrar los resultados obtenidos ingresados por el usuario
+    cout << "\nFrecuencia de los numeros ingresados obtenidos:" << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "El numero " << i + 1 << ": " << frecuencia[i] << " veces" << endl;
+    }
+    cout << "\nMuchas gracias por visitarnos. Vuelve pronto" << endl;
+    return 0;
+}
+//Si puedes soñarlo, puedes programarlo :)
