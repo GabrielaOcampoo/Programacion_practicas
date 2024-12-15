@@ -1,0 +1,56 @@
+#include <iostream> //Libreria estandar para la entrada y salida de los datos para el programa
+#include <vector> // Librería estándar para manejar arreglos dinámicos (vectores) que ajustan su tamaño automáticamente y ofrecen métodos útiles como push_back, size, etc.
+using namespace std;
+
+// Función para ingresar calificaciones
+void ingresarCalificaciones(vector<int> &calificaciones) {
+    cout << "Bienvenidos estimados usuarios, siempre es un placer para nosotros tenerte aqui :)" << endl;
+    cout << "Por favor, estimado(a) introduzca las calificaciones de 20 estudiantes (entre el valor de 0 y 10):" << endl;
+
+    for (int i = 0; i < calificaciones.size(); ++i) {
+        cout << "Calificacion del estudiante " << i + 1 << ": ";
+        cin >> calificaciones[i];
+
+        // Validar que la calificación esté en el rango permitido
+        while (calificaciones[i] < 0 || calificaciones[i] > 10) {
+            cout << "Por favor, introduce una calificacion valida (entre el valor de 0 y 10): ";
+            cin >> calificaciones[i];
+        }
+    }
+}
+// Función para contar los estudiantes en cada rango
+void contarPorRangos(const vector<int> &calificaciones, int &rango_0_5, int &rango_6_8, int &rango_9_10) {
+    for (int calificacion : calificaciones) {
+        if (calificacion >= 0 && calificacion <= 5) {
+            ++rango_0_5;
+        } else if (calificacion >= 6 && calificacion <= 8) {
+            ++rango_6_8;
+        } else if (calificacion >= 9 && calificacion <= 10) {
+            ++rango_9_10;
+        }
+    }
+}
+// Función para mostrar los resultados
+void mostrarResultados(int rango_0_5, int rango_6_8, int rango_9_10) {
+    cout << "\nResultados obtenidos de su informacion ingresada:" << endl;
+    cout << "Estudiantes con calificaciones entre 0 y 5: " << rango_0_5 << endl;
+    cout << "Estudiantes con calificaciones entre 6 y 8: " << rango_6_8 << endl;
+    cout << "Estudiantes con calificaciones entre 9 y 10: " << rango_9_10 << endl;
+
+    cout <<"Muchas gracias por preferirnos. Vuelve pronto :)"<< endl;
+}
+int main() {
+    // Vector para almacenar las calificaciones
+    vector<int> calificaciones(20);
+    
+    // Variables para los rangos
+    int rango_0_5 = 0, rango_6_8 = 0, rango_9_10 = 0;
+
+    // Llamada a funciones
+    ingresarCalificaciones(calificaciones);
+    contarPorRangos(calificaciones, rango_0_5, rango_6_8, rango_9_10);
+    mostrarResultados(rango_0_5, rango_6_8, rango_9_10);
+
+    return 0;
+}
+//Si puedes soñarlo, puedes programarlo :)
