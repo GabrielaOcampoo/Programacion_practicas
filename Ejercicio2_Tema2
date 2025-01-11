@@ -1,0 +1,64 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+#include <vector>   // Librería para manejar vectores.
+#include <string>   // Librería usada para manejar cadenas de caracteres.
+using namespace std;
+
+// Función para mostrar los precios de un vector junto con el nombre de la tienda.
+void mostrarVector(const vector<double> &vec, const string &nombre) {
+    cout << "Precios en " << nombre << ": ";
+    for (double precio : vec) { // Itera sobre cada elemento del vector.
+        cout << precio << " , "; // Muestra el precio seguido de una coma.
+    }
+    cout << endl;
+}
+
+// Función para comparar precios entre dos tiendas y mostrar dónde cada producto es más barato.
+void compararPrecios(const vector<double> &tienda1, const vector<double> &tienda2) {
+    cout << "\nLa comparación de precios por producto ingresados:\n";
+    for (size_t i = 0; i < tienda1.size(); ++i) { // Itera sobre el número de productos.
+        if (tienda1[i] < tienda2[i]) { // Si el precio en tienda1 es menor al de tienda2.
+            cout << "Producto " << i + 1 << ": Es más barato en Tienda 1\n";
+        } else if (tienda1[i] > tienda2[i]) { // Si el precio en tienda2 es menor al de tienda1.
+            cout << "Producto " << i + 1 << ": Es más barato en Tienda 2\n";
+        } else { // Si ambos precios son iguales.
+            cout << "Producto " << i + 1 << ": El precio obtenido es igual en ambas tiendas\n";
+        }
+    }
+}
+
+int main() {
+    int numProductos; // Variable para almacenar la cantidad de productos.
+
+    // Mensaje de bienvenida para los usuarios.
+    cout << "Buen día, estimados usuarios/as siempre es un gusto que nos prefieran :)" << endl;
+    cout << "Por favor, ingrese el número de productos que usted desea: ";
+    cin >> numProductos; // Se pide al usuario ingresar la cantidad de productos.
+
+    // Declaración de dos vectores para almacenar los precios en ambas tiendas.
+    vector<double> preciosTienda1(numProductos);
+    vector<double> preciosTienda2(numProductos);
+
+    // Pedir precios para Tienda 1.
+    cout << "\nPor favor, ingrese los precios en Tienda 1:\n";
+    for (int i = 0; i < numProductos; ++i) {
+        cout << "Producto " << i + 1 << ": ";
+        cin >> preciosTienda1[i]; // Se almacena cada precio ingresado en el vector.
+    }
+
+    // Pedir precios para Tienda 2.
+    cout << "\nPor favor, ingrese los precios en Tienda 2:\n";
+    for (int i = 0; i < numProductos; ++i) {
+        cout << "Producto " << i + 1 << ": ";
+        cin >> preciosTienda2[i]; // Se almacena cada precio ingresado en el vector.
+    }
+
+    // Mostrar los precios de ambos vectores utilizando la función mostrarVector.
+    mostrarVector(preciosTienda1, "Tienda 1");
+    mostrarVector(preciosTienda2, "Tienda 2");
+
+    // Comparar los precios entre las dos tiendas.
+    compararPrecios(preciosTienda1, preciosTienda2);
+
+    return 0; // Indica que el programa terminó exitosamente.
+}
+//Si puedes soñarlo, puedes programarlo :)
