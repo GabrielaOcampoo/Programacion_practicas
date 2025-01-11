@@ -1,0 +1,113 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+#include <vector>   // Librería para manejar vectores.
+#include <string>   // Librería usada para manejar cadenas de caracteres.
+using namespace std;
+
+// Función para agregar un nuevo empleado
+void agregar_empleado(vector<string>& nombres, vector<double>& salarios) {
+    string nombre;
+    double salario;
+
+    cout << "Por favor, ingrese el nombre del empleado: ";
+    cin >> nombre;
+    cout << "Por favor, ingrese el salario del empleado: ";
+    cin >> salario;
+
+    // Agregar el nuevo empleado a los vectores
+    nombres.push_back(nombre);
+    salarios.push_back(salario);
+    cout << "Super :) Empleado agregado exitosamente." << endl;
+}
+
+// Función para modificar el salario de un empleado
+void modificar_salario(vector<string>& nombres, vector<double>& salarios) {
+    string nombre;
+    cout << "Por favor, ingrese el nombre del empleado a modificar: ";
+    cin >> nombre;
+
+    // Buscar el empleado
+    for (size_t i = 0; i < nombres.size(); i++) {
+        if (nombres[i] == nombre) {
+            cout << "Por favor, ingrese el nuevo salario: ";
+            cin >> salarios[i];
+            cout << "Salario correctamente modificado." << endl;
+            return;
+        }
+    }
+    cout << "Auch :( Empleado no encontrado." << endl;
+}
+
+// Función para eliminar un empleado
+void eliminar_empleado(vector<string>& nombres, vector<double>& salarios) {
+    string nombre;
+    cout << "Por favor, ingrese el nombre del empleado a eliminar: ";
+    cin >> nombre;
+
+    // Buscar el empleado
+    for (size_t i = 0; i < nombres.size(); i++) {
+        if (nombres[i] == nombre) {
+            nombres.erase(nombres.begin() + i);
+            salarios.erase(salarios.begin() + i);
+            cout << ":( Empleado eliminado." << endl;
+            return;
+        }
+    }
+    cout << ":( Empleado no encontrado." << endl;
+}
+
+// Función para buscar un empleado
+void buscar_empleado(const vector<string>& nombres, const vector<double>& salarios) {
+    string nombre;
+    cout << "Por favor, ingrese el nombre del empleado a buscar: ";
+    cin >> nombre;
+
+    // Buscar el empleado
+    for (size_t i = 0; i < nombres.size(); i++) {
+        if (nombres[i] == nombre) {
+            cout << "Nombre: " << nombres[i] << ", Salario: $" << salarios[i] << endl;
+            return;
+        }
+    }
+    cout << ":( Empleado no encontrado." << endl;
+}
+
+// Función principal
+int main() {
+    vector<string> nombres; // Vector para almacenar nombres de empleados
+    vector<double> salarios; // Vector para almacenar salarios de empleados
+    int opcion;
+    cout << "\nBienvenidos estimados Trabajadores es un placer contar con su contribucion en nuestra empresa :)" << endl;
+    // Menú de opciones
+    do {
+        cout << "\nGestion de Empleados" << endl;
+        cout << "1. Agregar empleado" << endl;
+        cout << "2. Modificar salario" << endl;
+        cout << "3. Eliminar empleado" << endl;
+        cout << "4. Buscar empleado" << endl;
+        cout << "5. Salir" << endl;
+        cout << "Por favor, seleccione una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                agregar_empleado(nombres, salarios);
+                break;
+            case 2:
+                modificar_salario(nombres, salarios);
+                break;
+            case 3:
+                eliminar_empleado(nombres, salarios);
+                break;
+            case 4:
+                buscar_empleado(nombres, salarios);
+                break;
+            case 5:
+                cout << "Saliendo del programa. Muchas gracias por visitarnos." << endl;
+                break;
+            default:
+                cout << "Opcion inválida. Intente de nuevo por favor." << endl;
+        }
+    } while (opcion != 5);
+
+    return 0;
+} //Si puedes soñarlo, puedes programarlo :)
