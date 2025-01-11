@@ -1,0 +1,110 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+#include <vector>   // Librería para manejar vectores.
+#include <string>   // Librería usada para manejar cadenas de caracteres.
+using namespace std;
+
+// Función para agregar un nuevo estudiante
+void agregar_estudiante(vector<string>& nombres, vector<int>& edades) {
+    string nombre;
+    int edad;
+
+    cout << "Por favor, ingrese el nombre del estudiante: ";
+    cin >> nombre;
+    cout << "Por favor, ingrese la edad del estudiante: ";
+    cin >> edad;
+
+    // Agregar el nuevo estudiante a los vectores
+    nombres.push_back(nombre);
+    edades.push_back(edad);
+    cout << "Super, que bien. Estudiante agregado exitosamente." << endl;
+}
+// Función para modificar la información de un estudiante
+void modificar_estudiante(vector<string>& nombres, vector<int>& edades) {
+    string nombre;
+    cout << "Por favor, ingrese el nombre del estudiante a modificar: ";
+    cin >> nombre;
+
+    // Buscar el estudiante
+    for (size_t i = 0; i < nombres.size(); i++) {
+        if (nombres[i] == nombre) {
+            cout << "Por favor, ingrese el nuevo nombre: ";
+            cin >> nombres[i];
+            cout << "Por favor, ingrese la nueva edad: ";
+            cin >> edades[i];
+            cout << "Informacion del estudiante modificada correctamente." << endl;
+            return;
+        }
+    }
+    cout << "Estudiante no encontrado :(" << endl;
+}
+// Función para eliminar un estudiante
+void eliminar_estudiante(vector<string>& nombres, vector<int>& edades) {
+    string nombre;
+    cout << "Por favor, ingrese el nombre del estudiante a eliminar: ";
+    cin >> nombre;
+
+    // Buscar el estudiante
+    for (size_t i = 0; i < nombres.size(); i++) {
+        if (nombres[i] == nombre) {
+            nombres.erase(nombres.begin() + i);
+            edades.erase(edades.begin() + i);
+            cout << "Estudiante eliminado :(" << endl;
+            return;
+        }
+    }
+    cout << "Estudiante no encontrado :(" << endl;
+}
+// Función para buscar un estudiante por nombre
+void buscar_estudiante(const vector<string>& nombres, const vector<int>& edades) {
+    string nombre;
+    cout << "Por favor, ingrese el nombre del estudiante a buscar: ";
+    cin >> nombre;
+
+    // Buscar el estudiante
+    for (size_t i = 0; i < nombres.size(); i++) {
+        if (nombres[i] == nombre) {
+            cout << "Nombre: " << nombres[i] << ", Edad: " << edades[i] << endl;
+            return;
+        }
+    }
+    cout << "Estudiante no encontrado :(" << endl;
+}
+// Función principal
+int main() {
+    vector<string> nombres; // Vector para almacenar nombres de estudiantes
+    vector<int> edades;     // Vector para almacenar edades de estudiantes
+    int opcion;
+    cout << "\nBienvenidos/as estimados/as estudiantes. Estamos encantados que nos visiten :) Siempre es un placer tenerlos aqui." << endl;
+    do {
+        // Menú de opciones
+        cout << "\nREGISTRO DE ESTUDIANTES" << endl;
+        cout << "1. Agregar estudiante" << endl;
+        cout << "2. Modificar estudiante" << endl;
+        cout << "3. Eliminar estudiante" << endl;
+        cout << "4. Buscar estudiante" << endl;
+        cout << "5. Salir" << endl;
+        cout << "Por favor, seleccione una opcion: ";
+        cin >> opcion;
+        switch (opcion) {
+            case 1:
+                agregar_estudiante(nombres, edades);
+                break;
+            case 2:
+                modificar_estudiante(nombres, edades);
+                break;
+            case 3:
+                eliminar_estudiante(nombres, edades);
+                break;
+            case 4:
+                buscar_estudiante(nombres, edades);
+                break;
+            case 5:
+                cout << "Saliendo del programa :)" << endl;
+                break;
+            default:
+                cout << "Opcion invalida. Intente de nuevo. Por favor." << endl;
+        }
+    } while (opcion != 5);
+
+    return 0;
+} //Si puedes soñarlo, puedes programarlo :)
