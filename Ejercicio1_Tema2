@@ -1,0 +1,43 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+#include <vector>   // Librería para manejar vectores.
+using namespace std;
+
+// Función para ingresar calificaciones
+void ingresar_calificaciones(vector<float>& calificaciones, const string& materia) {
+    cout << "Por favor, ingrese las calificaciones para " << materia << ":" << endl;
+    for (size_t i = 0; i < calificaciones.size(); i++) {
+        cout << "Estudiante " << (i + 1) << ": ";
+        cin >> calificaciones[i];
+    }
+}
+
+// Función para mostrar las diferencias de calificaciones
+void mostrar_diferencias(const vector<float>& calificaciones1, const vector<float>& calificaciones2) {
+    cout << "Las diferencias de calificaciones obtenidas entre las dos materias fueron:" << endl;
+    for (size_t i = 0; i < calificaciones1.size(); i++) {
+        float diferencia = calificaciones1[i] - calificaciones2[i];
+        cout << "Estudiante " << (i + 1) << ": " << diferencia << endl;
+    }
+}
+
+// Función principal
+int main() {
+    int num_estudiantes;
+    cout << "Bienvenidos estimados usuarios y estudiantes, siempre es un placer tenerlos aqui con nosotros :)"<< endl;
+    cout << "Por favor, ingrese el numero de estudiantes que desea: ";
+    cin >> num_estudiantes;
+
+    vector<float> calificaciones_materia1(num_estudiantes);
+    vector<float> calificaciones_materia2(num_estudiantes);
+
+    // Ingreso de calificaciones
+    ingresar_calificaciones(calificaciones_materia1, "la primera materia");
+    ingresar_calificaciones(calificaciones_materia2, "la segunda materia");
+
+    // Mostrar las diferencias
+    mostrar_diferencias(calificaciones_materia1, calificaciones_materia2);
+   cout << "Muchas gracias por preferirnos. Vuelve pronto :)" << endl;
+    return 0;
+}
+
+//Si puedes soñarlo, puedes programarlo :)
