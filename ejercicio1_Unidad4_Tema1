@@ -1,0 +1,82 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+#include <cmath> // Para sqrt
+
+using namespace std;
+
+// Función principal
+int main() {
+    // Declarar las dimensiones del arreglo
+    int m, n, k;
+    cout << "PROGRAMA DE MATRICES :)"<< endl;
+    // Pedir dimensiones y valor del escalar
+    cout << "Por favor, introduzca el numero de filas (m): "<< endl;
+    cin >> m;
+    cout << "Por favor, introduzca el numero de columnas (n): "<< endl;
+    cin >> n;
+
+    // Declarar los arreglos multidimensionales
+    int A[m][n], B[m][n];
+    double C[m][n]; // C es double porque podría contener raíces cuadradas
+
+    // Pedir el escalar k
+    cout << "Por favor, introduzca el valor del escalar k: "<< endl;
+    cin >> k;
+
+    // Rellenar el arreglo A con valores ingresados por teclado
+    cout << "Por favor, introduzca los elementos del arreglo A:\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << "A[" << i << "][" << j << "]: ";
+            cin >> A[i][j];
+        }
+    }
+
+    // Multiplicar por k para generar el arreglo B
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            B[i][j] = A[i][j] * k;
+        }
+    }
+
+    // Operaciones sobre B para generar el arreglo C
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (B[i][j] % 2 == 0) {
+                // Si es par, elevar al cuadrado
+                C[i][j] = pow(B[i][j], 2);
+            } else {
+                // Si es impar, calcular la raíz cuadrada
+                C[i][j] = sqrt(B[i][j]);
+            }
+        }
+    }
+
+    // Mostrar el arreglo A
+    cout << "\nArreglo A (Matriz Original):\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << A[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    // Mostrar el arreglo B
+    cout << "\nArreglo B (Multiplicado por k):\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << B[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    // Mostrar el arreglo C
+    cout << "\nArreglo C (Procesado o Modificado):\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << C[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "Esperamos de todo corazon que esta haya sido una experiencia unica. Vuelve pronto :)"<< endl;
+    return 0;
+} //Si puedes soñarlo, puedes programarlo :)
