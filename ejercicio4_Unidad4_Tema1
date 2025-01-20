@@ -1,0 +1,86 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+using namespace std;
+int main() {
+    int n;
+    cout << "PROGRAMA DE MATRICES"<< endl;
+    cout << ""<< endl;
+    cout << "Por favor, ingrese el medida de las matrices (n): "<< endl;
+    cin >> n;
+
+    int matrizA[n][n]; // Matriz A
+    int matrizB[n][n]; // Matriz B
+    int matrizC[n][n]; // Matriz C
+
+    // Llenar la matriz A
+    cout << "Por favor, ingrese los elementos de la matriz A (enteros pares):" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int num;
+            // Solicitar un número par hasta que se ingrese uno válido
+            do {
+                cout << "Elemento [" << i << "][" << j << "]: ";
+                cin >> num;
+                if (num % 2 != 0) {
+                    cout << "Error: Debe ingresar un numero par. Intente de nuevo." << endl;
+                }
+            } while (num % 2 != 0);
+            matrizA[i][j] = num; // Asignar el número par a la matriz A
+        }
+    }
+
+    // Llenar la matriz B
+    cout << "Por favor, ingrese los elementos de la matriz B (enteros pares):" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int num;
+            // Solicitar un número par hasta que se ingrese uno válido
+            do {
+                cout << "Elemento [" << i << "][" << j << "]: ";
+                cin >> num;
+                if (num % 2 != 0) {
+                    cout << "Error: Intente de nuevo. Debe ingresar un numero par por favor." << endl;
+                }
+            } while (num % 2 != 0);
+            matrizB[i][j] = num; // Asignar el número par a la matriz B
+        }
+    }
+
+    // Crear la matriz C donde cada elemento es el cubo del elemento correspondiente de A
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            matrizC[i][j] = matrizA[i][j] * matrizA[i][j] * matrizA[i][j]; // Calcular el cubo
+        }
+    }
+
+    // Modificar la última fila de la matriz B multiplicando sus elementos por 2
+    for (int j = 0; j < n; j++) {
+        matrizB[n-1][j] *= 2; // Multiplicar por 2
+    }
+
+    // Mostrar las tres matrices
+    cout << "La Matriz A:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrizA[i][j] << "\t"; // Mostrar cada elemento de A
+        }
+        cout << endl; // Nueva línea al final de cada fila
+    }
+
+    cout << "La Matriz B:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrizB[i][j] << "\t"; // Mostrar cada elemento de B
+        }
+        cout << endl; // Nueva línea al final de cada fila
+    }
+
+    cout << "La Matriz C (Cubos de Matriz A):" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrizC[i][j] << "\t"; // Mostrar cada elemento de C
+        }
+        cout << endl; // Nueva línea al final de cada fila
+    }
+    cout << "Muchas gracias por preferirnos :)" << endl;
+    return 0;
+} //Si puedes soñarlo, puedes programarlo :)
