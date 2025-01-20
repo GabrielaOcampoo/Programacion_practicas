@@ -1,0 +1,60 @@
+#include <iostream> // Librería estándar para entrada y salida de datos.
+using namespace std;
+
+const int SIZE = 4;
+
+int main() {
+    double A[SIZE][SIZE], B[SIZE][SIZE], C[SIZE][SIZE];
+    cout << "\nCALCULADORA DE MATRICES\n" << endl;
+    // Llenar la matriz A
+    cout << "Por favor, ingrese los elementos de la matriz A (4x4):" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            cout << "Elemento [" << i << "][" << j << "]: ";
+            cin >> A[i][j];
+        }
+    }
+
+    // Llenar la matriz B
+    cout << "Por favor, ingrese los elementos de la matriz B (4x4):" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            cout << "Elemento [" << i << "][" << j << "]: ";
+            cin >> B[i][j];
+        }
+    }
+
+    // Sumar las matrices A y B, almacenar en C
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+
+    // Mostrar las matrices A, B y C
+    cout << "La Matriz A obtenida:" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            cout << A[i][j] << "\t";
+        }
+        cout << endl;
+    }
+
+    cout << "La Matriz B obtenida:" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            cout << B[i][j] << "\t";
+        }
+        cout << endl;
+    }
+
+    cout << "El resultado de la Matriz C obtenida (Suma):" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            cout << C[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    cout << "Muchas gracias por preferirnos. Vuelve pronto estimado usuario :)" << endl;
+    return 0;
+} //Si puedes soñarlo, puedes programarlo :)
