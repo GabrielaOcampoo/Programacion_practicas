@@ -1,0 +1,179 @@
+#include <iostream>  // Libreria estandar para entrada y salida
+#include <fstream>   // Para manejo de archivos
+#include <sstream>   // Para manipular cadenas de texto
+#include <vector>    // Para manejar vectores
+#include <numeric>   // Para operaciones matematicas
+#include <string>    // Para manipular cadenas de caracteres
+#include <algorithm> //Algoritmos generales (buscar, ordenar, contar, etc.)
+
+using namespace std;
+
+// Funcion para contar cuantas veces aparece una palabra en un texto
+int contarPalabra(const string &contenido, const string &palabra) {
+    size_t pos = 0;
+    int conteo = 0;
+    while ((pos = contenido.find(palabra, pos)) != string::npos) {
+        conteo++;
+        pos += palabra.length(); // Avanza para evitar contar la misma palabra varias veces
+    }
+    return conteo;
+}
+
+// Funcion para reemplazar una palabra en un texto
+int contarReemplazar(string &contenido, const string &buscar, const string &reemplazo) {
+    size_t pos = 0;
+    int conteo = 0;
+    while ((pos = contenido.find(buscar, pos)) != string::npos) {
+        conteo++;
+        contenido.replace(pos, buscar.length(), reemplazo);
+        pos += reemplazo.length(); // Avanza despues del reemplazo
+    }
+    return conteo;
+}
+
+// Funcion para extraer numeros de un texto
+vector<int> extraerNumeros(const string &contenido) {
+    vector<int> numeros;
+    stringstream ss(contenido);
+    string palabra;
+    while (ss >> palabra) {
+        // Eliminar el símbolo '$' si existe en la palabra
+        palabra.erase(remove(palabra.begin(), palabra.end(), '$'), palabra.end());
+        try {
+            int num = stoi(palabra); // Intentar convertir la palabra a un número
+            numeros.push_back(num);
+        } catch (...) {
+            continue; // Ignorar si no se puede convertir
+        }
+    }
+    return numeros;
+}
+
+
+int main() {
+    string archivoDatos = "datos.txt";          // Nombre del archivo de datos
+    string archivoOperaciones = "operaciones.txt"; // Nombre del archivo para operaciones
+    string archivoResultado = "resultado.txt";   // Nombre del archivo de resultados
+
+    // 1. CREAR ARCHIVO DE DATOS
+    ofstream escribir(archivoDatos); // Crear objeto para escribir en el archivo
+    if (!escribir) { // Verificar si el archivo se creó correctamente
+        cerr << "Error al crear 'datos.txt'.\n";
+        return 1;
+    }
+
+    // Escribir contenido en el archivo
+    escribir << "\nAMWIGAPEJA: MODA Y BELLEZA CON PROPOSITO :)\n\n";
+    escribir << "Amwigapeja es una marca innovadora en moda y belleza, enfocada en la sostenibilidad y el empoderamiento.\n";
+    escribir << "Nuestro objetivo es crear una comunidad donde la belleza se celebre en todas sus formas, fomentando la confianza y la autenticidad en cada individuo.\n";
+    escribir << "Creemos en la moda accesible y responsable, utilizando materiales ecologicos y practicas eticas en toda nuestra cadena de produccion.\n\n";
+    escribir << "A su vez, nuestros productos estan valorados entre $7, $8, $15, $25, $30, $32, $40, $60, $67, $120, $123, 136, $141, $147, $154, $170, $188, $192, $250, $268, $295, $300.\n";
+    escribir << "Nuestros productos:\n";
+    escribir << "Ropa sostenible (precios: $14 - $310)\n";
+    escribir << "Cosmeticos naturales (precios: $6 - $45)\n";
+    escribir << "Accesorios ecologicos (precios: $12 - $64)\n";
+    escribir << "Calzado etico (precios: $48 - $125)\n";
+    escribir << "Cuidado personal (precios: $16 - $38)\n\n";
+    escribir << "Nuestros valores:\n";
+    escribir << "Sostenibilidad: 100% de materiales reciclados.\n";
+    escribir << "Etica: Condiciones laborales justas.\n";
+    escribir << "Innovacion: 5-10 nuevos productos cada temporada.\n";
+    escribir << "Calidad: 95% de nuestros productos pasan pruebas rigurosas.\n";
+    escribir << "Comunidad: Eventos trimestrales con clientes.\n\n";
+    escribir << "Empoderamiento: Colaboramos con 10 organizaciones que apoyan a mujeres emprendedoras y 10 organizaciones de mujeres emprendedoras en crecimiento.\n";
+    escribir << "Diversidad: Nuestro equipo esta compuesto por un 60% de mujeres y un 40% de hombres.\n";
+    escribir << "Educacion: Ofrecemos talleres sobre moda sostenible a 200 personas a los 365 o 366 dias.\n";
+    escribir << "Inclusividad: Ofrecemos tallas desde XS hasta 3XL, asegurando que todos se sientan representados.\n";
+    escribir << "\nLa moda es arte en movimiento. Cada color, textura y accesorio que eliges cuenta una historia sobre quien eres y como ves el mundo.\n\n";
+    escribir << "\nVestirse es un acto de amor propio. No importa si usas tacones de artesano o artista, o unas zapatillas comodas, lo esencial es que cada prenda refleje tu esencia.\n";
+    escribir << "\nUn buen look puede cambiar tu dia. A veces, un vestido bonito o un labial vibrante son suficientes para levantar el animo y recordarte lo increible que eres.\n";
+    escribir << "\nEl maquillaje y la moda van de la mano. Un labial rojo puede ser tu mejor accesorio y un buen par de zapatos, la clave para sentirte imparable.\n";
+    escribir.close(); // Cerrar el archivo
+    cout << "El archivo 'datos.txt' fue creado correctamente.\n";
+
+    // 2. LEER EL ARCHIVO Y MOSTRAR SU CONTENIDO
+    ifstream leer(archivoDatos); // Crear objeto para leer el archivo
+    if (!leer) { // Verificar si el archivo se abrió correctamente
+        cerr << "Auch. Error al abrir 'datos.txt'.\n";
+        return 1;
+    }
+    stringstream buffer; // Crear un buffer para almacenar el contenido
+    buffer << leer.rdbuf(); // Leer todo el contenido del archivo
+    string contenido = buffer.str(); // Convertir el flujo a una cadena
+    leer.close(); // Cerrar el archivo
+
+    cout << "\nCONTENIDO DEL ARCHIVO:\n";
+    cout << contenido << "\n";
+
+     // 3. BUSCAR Y CONTAR PALABRA
+    string palabraBuscar, palabraReemplazo;
+    cout << "Por favor, ingrese la palabra a buscar: ";
+    cin >> palabraBuscar; // Solicitar palabra a buscar
+    int conteo = contarPalabra(contenido, palabraBuscar); // Contar ocurrencias
+    cout << "La palabra ingresada '" << palabraBuscar << "' se encontro " << conteo << " veces.\n";
+
+    // 4. REEMPLAZAR PALABRA
+    cout << "Por favor, ingrese la palabra para reemplazar '" << palabraBuscar << "': ";
+    cin >> palabraReemplazo; // Solicitar palabra para reemplazar
+    int reemplazos = contarReemplazar(contenido, palabraBuscar, palabraReemplazo); // Reemplazar palabra
+    cout << "Se reemplazo " << reemplazos << " veces.\n";
+
+    // 5. AGREGAR CONTENIDO AL ARCHIVO
+    string contenidoAdicional;
+    cout << "Por favor, ingrese contenido adicional para el archivo: ";
+    cin.ignore(); // Limpiar el buffer
+    getline(cin, contenidoAdicional); // Leer contenido adicional
+    contenido += "\n" + contenidoAdicional; // Agregar contenido adicional
+    ofstream salida(archivoDatos); // Crear objeto para escribir en el archivo
+    salida << contenido; // Escribir contenido actualizado
+    salida.close(); // Cerrar el archivo
+
+    
+    // 6. EXTRAER NÚMEROS Y GUARDAR RESULTADOS
+    vector<int> numeros = extraerNumeros(contenido); // Extraer números del contenido
+    if (!numeros.empty()) { // Verificar si se encontraron números
+        int suma = accumulate(numeros.begin(), numeros.end(), 0); // Calcular la suma
+        float promedio = static_cast<float>(suma) / numeros.size(); // Calcular el promedio
+        ofstream operaciones(archivoOperaciones); // Crear objeto para escribir en el archivo de operaciones
+        if (!operaciones) { // Verificar si el archivo se creó correctamente
+            cerr << "Error al crear 'operaciones.txt'.\n";
+            return 1;
+        }
+        operaciones << "La Suma de los numeros: " << suma << endl; // Escribir suma
+        operaciones << "El Promedio de los numeros: " << promedio << endl; // Escribir promedio
+        operaciones.close(); // Cerrar el archivo
+        cout << "Los Resultados guardados en 'operaciones.txt'.\n";
+    } else {
+        cout << "No se encontraron numeros en el archivo.\n";
+    }
+
+    // 7. COPIAR TODO A 'resultado.txt'
+    ifstream datos(archivoDatos); // Crear objeto para leer el archivo de datos
+    ifstream ops(archivoOperaciones); // Crear objeto para leer el archivo de operaciones
+    ofstream resultado(archivoResultado); // Crear objeto para escribir en el archivo de resultados
+
+    
+    // Verificar si los archivos se abrieron correctamente
+    if (!datos || !ops || !resultado) { // Verificar si los archivos se abrieron correctamente
+        cerr << "Error al generar 'resultado.txt'.\n";
+        return 1;
+    }
+
+    // Escribir encabezado y contenido del archivo de datos
+    resultado << "--- CONTENIDO DE DATOS.TXT ---\n"; // Escribir encabezado
+    resultado << datos.rdbuf(); // Copiar contenido de datos.txt
+
+    // Escribir encabezado y contenido del archivo de operaciones
+    resultado << "\n--- RESULTADOS DE OPERACIONES.TXT ---\n"; // Escribir encabezado
+    resultado << ops.rdbuf(); // Copiar contenido de operaciones.txt
+
+    // Cerrar los archivos
+    datos.close(); // Cerrar el archivo de datos
+    ops.close(); // Cerrar el archivo de operaciones
+    resultado.close(); // Cerrar el archivo de resultados
+    cout << "Muchas gracias por visitar nuestra marca atentamente AMWIGAPEJA :)\n";
+
+    cout << "Archivo 'resultado.txt' generado con exito.\n";
+    return 0; // Fin del programa
+}
+//Si puedes soñarlo, puedes programarlo :)
